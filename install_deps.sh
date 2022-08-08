@@ -11,7 +11,8 @@ curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key
 
 apt update
 
-apt install -y ros-melodic-pcl-ros ros-melodic-velodyne-msgs ros-melodic-nav-msgs
+### https://answers.ros.org/question/248637/fatal-error-anglesanglesh-no-such-file-or-directory-include-anglesanglesh/
+apt install -y ros-melodic-pcl-ros ros-melodic-velodyne-msgs ros-melodic-nav-msgs ros-melodic-angles python-wstool
 
 cd /opt/docker
 
@@ -81,6 +82,13 @@ cd /opt/docker/catkin_li_calib/src/lidar_IMU_calib
 
 ./build_submodules.sh
 
+cd ../../
+
+### https://github.com/ethz-asl/lidar_align/issues/16
+sudo mv /usr/include/flann/ext/lz4.h /usr/include/flann/ext/lz4.h.bak
+sudo mv /usr/include/flann/ext/lz4hc.h /usr/include/flann/ext/lz4.h.bak
+sudo ln -s /usr/include/lz4.h /usr/include/flann/ext/lz4.h
+sudo ln -s /usr/include/lz4hc.h /usr/include/flann/ext/lz4hc.h
 catkin_make
 
 source ./devel/setup.bash
