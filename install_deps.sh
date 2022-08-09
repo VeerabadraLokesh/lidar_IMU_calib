@@ -93,3 +93,4 @@ catkin_make
 
 source ./devel/setup.bash
 
+rm /opt/docker/install_deps.sh
